@@ -87,7 +87,7 @@ def GenerateConfig(ctx):
                 source_archive_url,
             'environmentVariables': {
                 'codeHash': m.hexdigest(),
-                'gitCredentialBucket': ctx.properties['gitCredentialBucket'],
+                'gitCredentialBucket': ctx.env['project'] + '-' + ctx.properties['gitCredentialBucket'],
                 'codeBucket': ctx.properties['codeBucket'],
                 'deployKey': ctx.properties['deployKey'],
                 'keyRing': ctx.properties['keyRing']
@@ -109,13 +109,5 @@ def GenerateConfig(ctx):
     resources = [create_staging_bucket, build_step, cloud_function]
 
     return {
-        'resources':
-            resources,
-        'outputs': [{
-            'name': 'sourceArchiveUrl',
-            'value': source_archive_url
-        }, {
-            'name': 'name',
-            'value': '$(ref.' + function_name + '.name)'
-        }]
+        'resources': resources
     }

@@ -1,0 +1,19 @@
+resources:
+- name: keyRing
+  type: gcp-types/cloudkms-v1:projects.locations.keyRings
+  properties:
+    parent: projects/{{ env["project"] }}/locations/{{ properties["location"] }}
+    keyRingId: {{ properties["keyRingName"] }}
+- name: cryptoKey
+  type: gcp-types/cloudkms-v1:projects.locations.keyRings.cryptoKeys
+  properties:
+    parent: $(ref.keyRing.name)
+    cryptoKeyId: {{ properties["keyName"] }}
+    purpose: ENCRYPT_DECRYPT
+- name: {{ env["project"] }}-{{ properties["gitCredentialBucket"] }}
+  type: gcp-types/storage-v1:buckets
+  properties:
+    predefinedAcl: projectPrivate
+    projection: full
+    location: {{ properties["location"] }}
+    storageClass: STANDARD

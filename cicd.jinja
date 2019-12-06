@@ -1,0 +1,24 @@
+resources:
+  - name: deploy-token
+    type: deploy-token.jinja
+    properties:
+      location: {{ properties['location'] }}
+      keyRingName: {{ properties['keyRing'] }}
+      keyName: {{ properties['deployKey'] }}
+      gitCredentialBucket: {{ properties['gitCredentialBucket'] }}
+  - name: function
+    type: cicd.py
+    properties:
+      location: {{ properties['location'] }}
+      keyRing: {{ properties['keyRing'] }}
+      deployKey: {{ properties['deployKey'] }}
+      gitCredentialBucket: {{ properties['gitCredentialBucket'] }}
+      functionName: push-event-endpoint
+      # All the files that start with this prefix will be packed in the Cloud Function
+      codeLocation: function/
+      codeBucket: staging-bucket
+      codeBucketObject: function.zip
+      timeout: 60s
+      runtime: nodejs8
+      availableMemoryMb: 256
+      entryPoint: triggerCloudBuild

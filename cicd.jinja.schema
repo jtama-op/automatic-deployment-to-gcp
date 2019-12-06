@@ -1,8 +1,20 @@
+info:
+  title: Automatic deployment from gitlab to cloud run
+  author: j.tama
+  description: Template to deploy on CloudRun from code
+
 required:
-- codeLocation
-- codeBucket
-- codeBucketObject
-- runtime
+- gitCredentialBucket
+- functionName
+- keyRing
+- deployKey
+- location
+
+imports:
+- path: deploy-token.jinja
+- path: cicd.py
+- path: function/index.js
+- path: function/package.json
 
 properties:
 

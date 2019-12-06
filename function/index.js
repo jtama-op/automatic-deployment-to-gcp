@@ -97,10 +97,10 @@ exports.triggerCloudBuild = (req, res) => {
     console.log('Starting build on branch ' + branchName);
     const configuration = {
         branchName,
-        gitCredentialBucket : env.process.gitCredentialBucket,
-        bucketName : env.process.codeBucket,
-        deployKey: env.process.deployKey,
-        keyRing: env.process.keyRing,
+        gitCredentialBucket : process.env.gitCredentialBucket,
+        bucketName : process.env.codeBucket,
+        deployKey: process.env.deployKey,
+        keyRing: process.env.keyRing,
         project : {
             name: req.body.project.name,
             url: req.body.project.git_http_url
