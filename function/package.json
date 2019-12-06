@@ -1,0 +1,10 @@
+{
+  "name": "gitlab-push-event-hook-endpoint",
+  "version": "1.0.0",
+  "description": "Triggers source builds",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "gcp-container-builder": "^0.1.0"
+  }
+}

@@ -1,0 +1,10 @@
+imports:
+  - path: deployToken.jinja
+
+resources:
+  - name: deployToken
+    type: deployToken.jinja
+    properties:
+      region: europe-west1
+      keyRingName: gitlab-deploy-key
+      keyName: deployKey
